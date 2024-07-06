@@ -44,26 +44,38 @@ def draw_text(text, color, x, y):
     window.blit(surface, (x, y))
 
 def choose_difficulty():
-    window.fill(BLACK)
-    draw_text("Choose Difficulty:", WHITE, width // 2 - 100, height // 2 - 100)
-    draw_text("1. Easy", WHITE, width // 2 - 50, height // 2 - 50)
-    draw_text("2. Medium", WHITE, width // 2 - 50, height // 2)
-    draw_text("3. Hard", WHITE, width // 2 - 50, height // 2 + 50)
-    pygame.display.update()
-
-    waiting = True
-    while waiting:
+    difficulties = ["Easy", "Medium", "Hard"]
+    selected = 0
+    
+    while True:
+        window.fill(BLACK)
+        draw_text("Choose Difficulty:", WHITE, width // 2 - 100, height // 2 - 100)
+        
+        for i, diff in enumerate(difficulties):
+            color = GREEN if i == selected else WHITE
+            draw_text(diff, color, width // 2 - 50, height // 2 - 50 + i * 50)
+            
+            if i == selected:
+                draw_text(">", color, width // 2 - 70, height // 2 - 50 + i * 50)
+        
+        pygame.display.update()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return None
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    return 5  # Easy: starting speed 5
-                elif event.key == pygame.K_2:
-                    return 8  # Medium: starting speed 8
-                elif event.key == pygame.K_3:
-                    return 12  # Hard: starting speed 12
+                if event.key == pygame.K_UP:
+                    selected = (selected - 1) % len(difficulties)
+                elif event.key == pygame.K_DOWN:
+                    selected = (selected + 1) % len(difficulties)
+                elif event.key == pygame.K_RETURN:
+                    if selected == 0:
+                        return 5  # Easy: starting speed 5
+                    elif selected == 1:
+                        return 8  # Medium: starting speed 8
+                    else:
+                        return 12  # Hard: starting speed 12
 
 # Choose difficulty
 snake_speed = choose_difficulty()
