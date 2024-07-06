@@ -151,4 +151,4 @@ pygame.display.update()
 pygame.time.wait(2000)
 
 # Quit the game
-pygame.quit()
+pygame.init()
