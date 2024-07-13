@@ -62,6 +62,8 @@ To modify the game:
 MIT
 
 ## Contact
-boakye.ebenezer@aol.com
+Email - boakye.ebenezer@aol.com
+
+LinkedIn - https://www.linkedin.com/in/ebenezer-boakye-033093247
 
 Enjoy playing Snake!
